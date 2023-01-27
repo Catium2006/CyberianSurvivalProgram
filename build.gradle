@@ -1,0 +1,30 @@
+import jdk.internal.dynalink.linker.LinkerServices
+
+plugins {
+    id 'java'
+}
+
+group 'top.catium'
+version '1.0-SNAPSHOT'
+
+repositories {
+    maven {
+        url 'https://maven.aliyun.com/repository/public/'
+    }
+    maven {
+        url 'https://maven.aliyun.com/repository/spring/'
+    }
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    implementation('com.alibaba:fastjson:2.0.22')
+
+}
+
+test {
+    useJUnitPlatform()
+}
