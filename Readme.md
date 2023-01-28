@@ -7,5 +7,6 @@
 
 ### 玩法  
 
-### 接口格式  
+### 接口说明  
+see at [TransmitFormat.md](TransmitFormat.md)
 

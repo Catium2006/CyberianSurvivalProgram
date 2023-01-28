@@ -78,23 +78,26 @@ public class Player {
      * @param playerName
      * @return 是否成功
      */
-    public static boolean newPlayer(String playerName) {
+    public static boolean newPlayer(String playerName, String _password) {
         Player p = new Player();
         p.name = playerName;
+        p.password = _password;
         playerMap.put(p.name, p);
         return isPlayer(p.name);
     }
 
     /**
      * 获取玩家名对应玩家对象, 返回引用
+     *
      * @param playerName
      * @return 玩家对象
      */
-    public static Player getPlayer(String playerName){
+    public static Player getPlayer(String playerName) {
         return playerMap.get(playerName);
     }
 
     public String name;
+    public String password; // 我是明文储存密码的屑
     public int health = 20;
     public int hunger = 0;
     public int ex = 0;
@@ -116,6 +119,7 @@ public class Player {
 
     /**
      * 保存玩家信息到文件
+     *
      * @return 是否成功
      */
     public boolean save() {
