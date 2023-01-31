@@ -56,4 +56,4 @@ URL:`/api/login`
 | key     | type    | 解释                                   |
 |---------|---------|--------------------------------------|
 | success | boolean | 操作是否成功                               |
-| uuid    | String  | `"success":false`时为空, 否则为身份凭据, 请妥善保存 |
+| token   | String  | `"success":false`时为空, 否则为身份凭据, 请妥善保存 |

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import top.catium.csp.Main;
 import top.catium.csp.file.TextFile;
 import top.catium.csp.game.item.Item;
+import top.catium.csp.util.MD5Util;
 
 import java.io.File;
 import java.util.HashMap;
@@ -82,6 +83,7 @@ public class Player {
         Player p = new Player();
         p.name = playerName;
         p.password = _password;
+        p.token = p.generateToken();
         playerMap.put(p.name, p);
         return isPlayer(p.name);
     }
@@ -104,6 +106,11 @@ public class Player {
     public int ex = 0;
     public String location = "新手村";
     public Map<String, Integer> backpack;
+
+    private String generateToken() {
+        String ori = "" + System.currentTimeMillis() + name + password;
+        return MD5Util.fromString(ori);
+    }
 
 
     /**
@@ -131,6 +138,15 @@ public class Player {
             return true;
         }
         Main.localLogger.error("error while saving player" + name + "(" + filename + ")");
+        return false;
+    }
+
+    public boolean login(String _password) {
+        token = null;
+        if (password.equals(_password)) {
+            token = generateToken();
+            return true;
+        }
         return false;
     }
 }
