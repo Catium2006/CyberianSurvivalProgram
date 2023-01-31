@@ -15,7 +15,7 @@ public class PostLogin {
             String password = jsonObject.getString("password");
             if (playerName != null && password != null) {
                 //此时格式正确
-                Response response = new Response();
+                Response_PostLogin response = new Response_PostLogin();
                 if (jsonObject.getString("type").equals("login")) {
                     if (Player.isPlayer(playerName)) {
                         if (Player.getPlayer(playerName).login(password)) {
@@ -43,7 +43,7 @@ public class PostLogin {
     }
 }
 
-class Response {
+class Response_PostLogin {
     public boolean success;
     public String token;
 }

@@ -13,9 +13,8 @@ public class Game {
      * @param msg
      * @return
      */
-    public Message exe(Message msg) {
+    public static Message exe(Message msg) {
         Message reply = new Message();
-        reply.sender = "server";
 
 
 

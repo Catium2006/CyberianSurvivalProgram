@@ -6,9 +6,6 @@ import static top.catium.csp.game.message.Message.MessageType.IMG_URL;
 import static top.catium.csp.game.message.Message.MessageType.TEXT;
 
 public class MessageNode {
-    static {
-        Main.localLogger.info("MessageNode class loaded.");
-    }
 
     public Message.MessageType type;
     public String content;
