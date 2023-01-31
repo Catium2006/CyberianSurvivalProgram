@@ -2,6 +2,7 @@ package top.catium.csp.net.api;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import top.catium.csp.game.Game;
 import top.catium.csp.game.message.Message;
 import top.catium.csp.game.player.Player;
@@ -30,6 +31,6 @@ public class PostMessage {
 }
 
 class Response_PostMessage {
-    boolean read = true;
-    Message reply;
+    public boolean read = true;
+    public Message reply;
 }
