@@ -80,6 +80,9 @@ public class Player {
      * @return 是否成功
      */
     public static boolean newPlayer(String playerName, String _password) {
+        if (isPlayer(playerName)) {
+            return false;
+        }
         Player p = new Player();
         p.name = playerName;
         p.password = _password;

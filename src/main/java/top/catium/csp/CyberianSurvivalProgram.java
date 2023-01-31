@@ -44,6 +44,20 @@ public class CyberianSurvivalProgram {
         Player.loadAll();
 //        Player.saveAll();
 
+        new Thread(){
+            @Override
+            public void run(){
+                super.run();
+                while(true){
+                    try {
+                        Thread.sleep(5000);
+                        Player.saveAll();
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        }.start();
 
     }
 

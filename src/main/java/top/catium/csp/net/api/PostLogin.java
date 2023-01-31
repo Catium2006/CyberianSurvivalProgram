@@ -15,7 +15,6 @@ public class PostLogin {
             String password = jsonObject.getString("password");
             if (playerName != null && password != null) {
                 //此时格式正确
-
                 Response response = new Response();
                 if (jsonObject.getString("type").equals("login")) {
                     if (Player.isPlayer(playerName)) {
@@ -27,7 +26,14 @@ public class PostLogin {
                         }
                     }
                 } else if (jsonObject.getString("type").equals("register")) {
-
+                    if (Player.newPlayer(playerName, password)) {
+                        response.success = true;
+                        response.token = Player.getPlayer(playerName).token;
+                    } else {
+                        response.success = false;
+                    }
+                } else {
+                    return new HTTPResponse(400, "Bad Request");
                 }
                 return new HTTPResponse(200, JSON.toJSONString(response));
             }
