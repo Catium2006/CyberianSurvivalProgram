@@ -57,3 +57,20 @@ URL:`/api/login`
 |---------|---------|--------------------------------------|
 | success | boolean | 操作是否成功                               |
 | token   | String  | `"success":false`时为空, 否则为身份凭据, 请妥善保存 |
+
+示例:  
+```javascript
+var formdata = new FormData();
+formdata.append("json", "{\"type\":\"login\",\"playerName\":\"Catium\",\"password\":\"abc\"}");
+
+var requestOptions = {
+  method: 'POST',
+  body: formdata,
+  redirect: 'follow'
+};
+
+fetch("localhost/api/login", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+```
