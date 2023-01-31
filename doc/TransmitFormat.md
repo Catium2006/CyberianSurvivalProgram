@@ -16,6 +16,24 @@ CSP的接口建立在HTTP协议上. 除资源文件外, 接口均需要以特定
 服务端在处理请求的时候, 会匹配`form-data`中的字符串`Content-Disposition: form-data; name="json"\r\n\r\n`,
 如果存在该字段则把它当做一段JSON字符串解析.
 
+一个`Post`示例, 用于登录账号:
+
+```javascript
+var formdata = new FormData();
+formdata.append("json", "{\"type\":\"login\",\"playerName\":\"Catium\",\"password\":\"abc\"}");
+
+var requestOptions = {
+  method: 'POST',
+  body: formdata,
+  redirect: 'follow'
+};
+
+fetch("/api/login", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+```
+
 服务端会返回`400 Bad Request`错误, 当发生如下情况:
 
 1. 不存在`Content-type..."json"\r\n\r\n`字段.
@@ -26,22 +44,21 @@ CSP的接口建立在HTTP协议上. 除资源文件外, 接口均需要以特定
 
 1. 接口不存在
 2. 资源不存在
-3. 访问地址有歧义
+3. 访问URL有歧义
 
 ## 目录
 
 + /
     + /api/
         + [/api/login](#api-login)
+        + [/api/message](#api-message)
     + /res/
-
-
 
 ### api-login
 
-URL:`/api/login`
+URL: `/api/login`
 
-请求方法:`POST`
+Method: `POST`
 
 请求JSON结构:
 
@@ -53,24 +70,34 @@ URL:`/api/login`
 
 响应JSON结构:
 
-| key     | type    | 解释                                   |
-|---------|---------|--------------------------------------|
-| success | boolean | 操作是否成功                               |
-| token   | String  | `"success":false`时为空, 否则为身份凭据, 请妥善保存 |
+| key     | type    | 解释                                       |
+|---------|---------|------------------------------------------|
+| success | boolean | 操作是否成功                                   |
+| token   | String  | `success`为`false`时为空, 否则为身份凭据, **请妥善保存** |
 
-示例:  
-```javascript
-var formdata = new FormData();
-formdata.append("json", "{\"type\":\"login\",\"playerName\":\"Catium\",\"password\":\"abc\"}");
+### api-message
 
-var requestOptions = {
-  method: 'POST',
-  body: formdata,
-  redirect: 'follow'
-};
+URL: `/api/message`
 
-fetch("localhost/api/login", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
-```
+Method: `POST`
+
+请求JSON结构:
+
+| key     | type                                | 解释        |
+|---------|-------------------------------------|-----------|
+| sender  | String                              | 发送该消息的玩家名 |
+| token   | String                              | 验证身份的凭据   |
+| message | [Message](DataStructure.md#message) | 消息链       |
+
+响应JSON结构:
+
+| key   | type                                | 解释                      |
+|-------|-------------------------------------|-------------------------|
+| read  | boolean                             | 固定为`true`, 表示服务器处理了你的消息 |
+| reply | [Message](DataStructure.md#message) | 服务器回复消息链, **可能为空**      |
+
+可能的错误:
+
+| 错误  | 原因                                    |
+|-----|---------------------------------------|
+| 403 | `token` 不是最近一次login取得的值 (单点登录限制或认证无效) |

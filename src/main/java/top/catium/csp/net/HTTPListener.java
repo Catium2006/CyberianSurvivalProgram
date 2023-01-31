@@ -7,6 +7,7 @@ import com.sun.net.httpserver.*;
 import top.catium.csp.CyberianSurvivalProgram;
 import top.catium.csp.Main;
 import top.catium.csp.net.api.PostLogin;
+import top.catium.csp.net.api.PostMessage;
 
 
 import java.io.*;
@@ -119,20 +120,22 @@ class MyHandler implements HttpHandler {
 
                 if (target.equals("login")) {
                     response = PostLogin.apply(jsonObject);
+                } else if (target.equals("message")) {
+                    response = PostMessage.apply(jsonObject);
                 } else {
                     //没有对应的接口
-                    response = new HTTPResponse(400,"Bad Request");
+                    response = new HTTPResponse(400, "Bad Request");
                 }
 
             } else if (method.equals("GET")) {
 
             } else {
-                response = new HTTPResponse(405,"Method Not Allowed");
+                response = new HTTPResponse(405, "Method Not Allowed");
             }
 
 
-             httpExchange.sendResponseHeaders(response.code, response.str.length());
-             os.write(response.str.getBytes());
+            httpExchange.sendResponseHeaders(response.code, response.str.length());
+            os.write(response.str.getBytes());
 
 
         } else {
