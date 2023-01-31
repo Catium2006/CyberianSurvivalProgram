@@ -50,8 +50,8 @@ public class CyberianSurvivalProgram {
                 super.run();
                 while(true){
                     try {
-                        Thread.sleep(5000);
-                        Player.saveAll();
+                        Thread.sleep(30000);
+                        Player.saveAll(); // 自动存档
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
