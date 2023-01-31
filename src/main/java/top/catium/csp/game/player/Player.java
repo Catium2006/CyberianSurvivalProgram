@@ -98,11 +98,13 @@ public class Player {
 
     public String name;
     public String password; // 我是明文储存密码的屑
+    public String token; // 用于验证消息发送者身份, 每次登录时变更
     public int health = 20;
     public int hunger = 0;
     public int ex = 0;
     public String location = "新手村";
     public Map<String, Integer> backpack;
+
 
     /**
      * 加载此玩家对象到表中, 表中是该对象的引用
