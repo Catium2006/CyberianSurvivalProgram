@@ -8,5 +8,5 @@
 ### 玩法  
 
 ### 接口说明  
-see at [TransmitFormat.md](TransmitFormat.md)
+see at [TransmitFormat.md](doc/TransmitFormat.md)
 
