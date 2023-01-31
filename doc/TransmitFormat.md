@@ -49,7 +49,7 @@ URL:`/api/login`
 |------------|--------|--------------------|
 | type       | String | "login"或"register" |
 | playerName | String | 玩家名                |
-| password   | String | 密码                 |
+| password   | String | 密码(明文)             |
 
 响应JSON结构:
 

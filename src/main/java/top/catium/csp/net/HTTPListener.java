@@ -112,10 +112,11 @@ class MyHandler implements HttpHandler {
 
                 if (json == null || jsonObject == null) {
                     //不是符合要求的格式
-                    String s = "400 Bad Request";
+                    String s = "Bad Request";
                     httpExchange.sendResponseHeaders(400, s.getBytes().length);
                     os.write(s.getBytes());
                 }
+
                 if (target.equals("login")) {
                     response = PostLogin.apply(jsonObject);
                 } else {
