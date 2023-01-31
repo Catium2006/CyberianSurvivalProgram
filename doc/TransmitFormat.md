@@ -91,10 +91,10 @@ Method: `POST`
 
 响应JSON结构:
 
-| key   | type                                | 解释                      |
-|-------|-------------------------------------|-------------------------|
-| read  | boolean                             | 固定为`true`, 表示服务器处理了你的消息 |
-| reply | [Message](DataStructure.md#message) | 服务器回复消息链, **可能为空**      |
+| key   | type                                | 解释                                |
+|-------|-------------------------------------|-----------------------------------|
+| read  | boolean                             | 固定为`true`, 表示服务器处理了你的消息           |
+| reply | [Message](DataStructure.md#message) | 服务器回复消息链, **内部MessageNode列表可能为空** |
 
 可能的错误:
 
