@@ -1,9 +1,12 @@
 package top.catium.csp.net;
 
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.sun.net.httpserver.*;
 import top.catium.csp.CyberianSurvivalProgram;
 import top.catium.csp.Main;
+import top.catium.csp.net.api.PostLogin;
 
 
 import java.io.*;
@@ -78,7 +81,6 @@ class MyHandler implements HttpHandler {
         return null;
     }
 
-
     public void handle(HttpExchange httpExchange) throws IOException {
         // 是否返回完了
         boolean finished = false;
@@ -101,36 +103,35 @@ class MyHandler implements HttpHandler {
             httpExchange.getResponseHeaders().set("Content-Type", "text/html; charset=utf8");
             httpExchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
 
+            HTTPResponse response = null;
 
             if (method.equals("POST")) {
                 String origin = readStringFromStream(is);
-
-//                Main.localLogger.info(origin);
-
                 String json = getPostJson(origin);
+                JSONObject jsonObject = JSON.parseObject(json);
 
-//                Main.localLogger.info("json:" + json);
-
-                if (json == null) {
+                if (json == null || jsonObject == null) {
                     //不是符合要求的格式
                     String s = "400 Bad Request";
                     httpExchange.sendResponseHeaders(400, s.getBytes().length);
                     os.write(s.getBytes());
                 }
+                if (target.equals("login")) {
+                    response = PostLogin.apply(jsonObject);
+                } else {
+                    //没有对应的接口
+                    response = new HTTPResponse(400,"Bad Request");
+                }
 
-
-                httpExchange.sendResponseHeaders(200, json.getBytes().length);
-                os.write(json.getBytes());
             } else if (method.equals("GET")) {
 
             } else {
-                String s = "405 Method Not Allowed";
-                httpExchange.sendResponseHeaders(405, s.getBytes().length);
-                os.write(s.getBytes());
+                response = new HTTPResponse(405,"Method Not Allowed");
             }
 
-            // httpExchange.sendResponseHeaders(200, method.getBytes().length);
-            // os.write(method.getBytes());
+
+             httpExchange.sendResponseHeaders(response.code, response.str.length());
+             os.write(response.str.getBytes());
 
 
         } else {
