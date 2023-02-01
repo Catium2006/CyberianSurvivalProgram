@@ -7,9 +7,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class LocalLogger {
-    static {
-        System.out.println("[static] LocalLogger class loaded");
-    }
+
 
     private File _logDir;
 

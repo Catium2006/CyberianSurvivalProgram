@@ -17,9 +17,6 @@ public class CyberianSurvivalProgram {
 
     public static boolean debug;
 
-    static {
-        System.out.println("[static] CyberianSurvivalProgram class loaded");
-    }
 
     public static void start() {
         Main.localLogger.info("main program started!");
