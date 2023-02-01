@@ -80,9 +80,9 @@ class MyHandler implements HttpHandler {
     }
 
     public void handle(HttpExchange httpExchange) throws IOException {
+
         // 是否返回完了
         boolean finished = false;
-
         InputStream is = httpExchange.getRequestBody();
         OutputStream os = httpExchange.getResponseBody();
 
@@ -130,9 +130,9 @@ class MyHandler implements HttpHandler {
                 response = new HTTPResponse(405, "Method Not Allowed");
             }
 
-
-            httpExchange.sendResponseHeaders(response.code, response.str.length());
+            httpExchange.sendResponseHeaders(response.code, response.str.getBytes().length);
             os.write(response.str.getBytes());
+
 
 
         } else {
@@ -145,6 +145,8 @@ class MyHandler implements HttpHandler {
 
         is.close();
         os.close();
+
+
 
     }
 
