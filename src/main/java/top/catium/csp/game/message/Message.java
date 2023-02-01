@@ -28,7 +28,7 @@ public class Message {
     public String toString() {
         String s = "";
         for (MessageNode node : nodes) {
-            s += node.toString();
+            s += node.toString() + " ";
         }
         return s;
     }
