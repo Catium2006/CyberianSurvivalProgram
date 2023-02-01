@@ -7,6 +7,16 @@ import static top.catium.csp.game.message.Message.MessageType.TEXT;
 
 public class MessageNode {
 
+    public MessageNode(String text) {
+        type = TEXT;
+        content = text;
+    }
+
+    public MessageNode(Message.MessageType t, String c) {
+        type = t;
+        content = c;
+    }
+
     public Message.MessageType type;
     public String content;
 
