@@ -14,9 +14,6 @@ import java.io.*;
 import java.net.InetSocketAddress;
 
 public class HTTPListener {
-    static {
-        Main.localLogger.info("HTTPListener class loaded.");
-    }
 
     public HttpServer httpServer;
 

@@ -4,9 +4,7 @@ import top.catium.csp.Main;
 import top.catium.csp.game.message.Message;
 
 public class Game {
-    static {
-        Main.localLogger.info("Game class loaded.");
-    }
+
 
     /**
      * 处理消息, 返回服务器答复(内容可能为空)

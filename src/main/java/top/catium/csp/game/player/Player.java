@@ -12,10 +12,6 @@ import java.util.Map;
 
 public class Player {
 
-    static {
-        Main.localLogger.info("Player class loaded.");
-    }
-
     protected static Map<String, Player> playerMap = new HashMap<>(); // 保存所有玩家, 对玩家的一切操作需要访问其中元素
 
     /**

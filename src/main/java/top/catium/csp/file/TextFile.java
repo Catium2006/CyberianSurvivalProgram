@@ -3,9 +3,7 @@ package top.catium.csp.file;
 import java.io.*;
 
 public class TextFile {
-    static{
-        System.out.println("[static] TextFile class loaded.");
-    }
+
 
     /**
      * 读文件
